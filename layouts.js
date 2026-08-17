@@ -1,0 +1,135 @@
+// layouts.js
+// Each layout maps the SAME physical key positions (US keyboard geometry)
+// to the characters that key produces on that layout, unshifted and shifted.
+// Converting between layouts = find which physical key a character sits on
+// in the source layout, then read off what that same physical key produces
+// on the target layout.
+
+const SLOTS = [
+  '`','1','2','3','4','5','6','7','8','9','0','-','=',
+  'q','w','e','r','t','y','u','i','o','p','[',']','\\',
+  'a','s','d','f','g','h','j','k','l',';',"'",
+  'z','x','c','v','b','n','m',',','.','/'
+];
+
+const LAYOUTS = {
+  us: {
+    label: 'English (US QWERTY)',
+    unshifted: [...SLOTS],
+    shifted: [
+      '~','!','@','#','$','%','^','&','*','(',')','_','+',
+      'Q','W','E','R','T','Y','U','I','O','P','{','}','|',
+      'A','S','D','F','G','H','J','K','L',':','"',
+      'Z','X','C','V','B','N','M','<','>','?'
+    ]
+  },
+
+  thai: {
+    label: 'Thai (Kedmanee)',
+    unshifted: [
+      '_','ๅ','/','-','ภ','ถ','ุ','ึ','ค','ต','จ','ข','ช',
+      'ๆ','ไ','ำ','พ','ะ','ั','ี','ร','น','ย','บ','ล','ฃ',
+      'ฟ','ห','ก','ด','เ','้','่','า','ส','ว','ง',
+      'ผ','ป','แ','อ','ิ','ื','ท','ม','ใ','ฝ'
+    ],
+    shifted: [
+      'ฃ','+','๑','๒','๓','๔','ู','฿','๕','๖','๗','๘','๙',
+      '๐','"','ฎ','ฑ','ธ','ํ','๊','๋','์','ญ','ฯ','ฦ','ฅ',
+      'ฤ','ฆ','ฏ','โ','ฌ','็','๋','ษ','ศ','ซ','.',
+      '(',')','ฉ','ฮ','ฺ','์','?','ฒ','ฬ','ฦ'
+    ]
+  },
+
+  german: {
+    label: 'German (QWERTZ)',
+    unshifted: [
+      '^','1','2','3','4','5','6','7','8','9','0','ß','´',
+      'q','w','e','r','t','z','u','i','o','p','ü','+','#',
+      'a','s','d','f','g','h','j','k','l','ö','ä',
+      'y','x','c','v','b','n','m',',','.','-'
+    ],
+    shifted: [
+      '°','!','"','§','$','%','&','/','(',')','=','?','`',
+      'Q','W','E','R','T','Z','U','I','O','P','Ü','*',"'",
+      'A','S','D','F','G','H','J','K','L','Ö','Ä',
+      'Y','X','C','V','B','N','M',';',':','_'
+    ]
+  },
+
+  russian: {
+    label: 'Russian (ЙЦУКЕН)',
+    unshifted: [
+      'ё','1','2','3','4','5','6','7','8','9','0','-','=',
+      'й','ц','у','к','е','н','г','ш','щ','з','х','ъ','\\',
+      'ф','ы','в','а','п','р','о','л','д','ж','э',
+      'я','ч','с','м','и','т','ь','б','ю','.'
+    ],
+    shifted: [
+      'Ё','!','"','№',';','%',':','?','*','(',')','_','+',
+      'Й','Ц','У','К','Е','Н','Г','Ш','Щ','З','Х','Ъ','/',
+      'Ф','Ы','В','А','П','Р','О','Л','Д','Ж','Э',
+      'Я','Ч','С','М','И','Т','Ь','Б','Ю',','
+    ]
+  }
+};
+
+// Build a fast reverse lookup per layout: char -> { slotIndex, shifted }
+function buildReverseIndex(layout) {
+  const map = new Map();
+  layout.unshifted.forEach((ch, i) => { if (!map.has(ch)) map.set(ch, { slotIndex: i, shifted: false }); });
+  layout.shifted.forEach((ch, i) => { if (!map.has(ch)) map.set(ch, { slotIndex: i, shifted: true }); });
+  return map;
+}
+
+Object.values(LAYOUTS).forEach(layout => {
+  layout.reverse = buildReverseIndex(layout);
+});
+
+// Convert a string typed in `fromKey` layout into what it would be
+// if the same physical keystrokes had happened in `toKey` layout.
+function convertText(text, fromKey, toKey) {
+  const from = LAYOUTS[fromKey];
+  const to = LAYOUTS[toKey];
+  let out = '';
+  let misses = 0;
+
+  for (const ch of text) {
+    const hit = from.reverse.get(ch);
+    if (!hit) {
+      out += ch; // space, newline, punctuation not on the map, digits already same, etc.
+      continue;
+    }
+    const mapped = hit.shifted ? to.shifted[hit.slotIndex] : to.unshifted[hit.slotIndex];
+    if (mapped === undefined) {
+      out += ch;
+      misses++;
+    } else {
+      out += mapped;
+    }
+  }
+  return { text: out, misses };
+}
+
+// Rough heuristic: score how "plausible" a string looks for a layout's script,
+// used to guess which direction the user probably meant.
+function scriptScore(text, key) {
+  const ranges = {
+    thai: [0x0E00, 0x0E7F],
+    russian: [0x0400, 0x04FF],
+    german: [0x0000, 0x024F], // latin, so score by letter frequency instead
+    us: [0x0000, 0x024F]
+  };
+  if (key === 'thai' || key === 'russian') {
+    const [lo, hi] = ranges[key];
+    let count = 0;
+    for (const ch of text) {
+      const code = ch.codePointAt(0);
+      if (code >= lo && code <= hi) count++;
+    }
+    return count;
+  }
+  // For latin-based layouts, just count basic a-z letters as a weak signal
+  let count = 0;
+  for (const ch of text) if (/[a-zA-Z]/.test(ch)) count++;
+  return count;
+}
