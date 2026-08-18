@@ -1,6 +1,6 @@
 <div align="center">
 
-# layout-fix
+# Layout Fix
 
 Two small, dependency-free browser tools for a keyboard gone wrong.
 
