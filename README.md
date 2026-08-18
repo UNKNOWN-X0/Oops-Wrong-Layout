@@ -8,7 +8,7 @@ Two small, dependency-free browser tools for a keyboard gone wrong.
 ![No build step](https://img.shields.io/badge/build%20step-none-brightgreen)
 ![Pure JS](https://img.shields.io/badge/dependencies-zero-blue)
 
-**[Live demo](#)** ← replace with your GitHub Pages URL after deploying
+**[https://unknown-x0.github.io/Oops-Wrong-Layout/](#)** ← replace with your GitHub Pages URL after deploying
 
 </div>
 
