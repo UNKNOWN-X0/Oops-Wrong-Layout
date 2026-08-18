@@ -1,70 +1,113 @@
+<div align="center">
+
 # layout-fix
 
-Two small typing tools, one static site.
+Two small, dependency-free browser tools for a keyboard gone wrong.
 
-**[Live demo](#)** — replace with your GitHub Pages URL once deployed (Settings → Pages → deploy from `main`).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![No build step](https://img.shields.io/badge/build%20step-none-brightgreen)
+![Pure JS](https://img.shields.io/badge/dependencies-zero-blue)
 
-## Layout Fix (`index.html`)
+**[Live demo](#)** ← replace with your GitHub Pages URL after deploying
 
-Typed a whole sentence in the wrong keyboard layout and forgot to switch? Paste it, pick the two layouts, get it back.
+</div>
 
-Works by mapping each character to the physical key that produced it in the "typed as" layout, then reading off what that same key produces in the "should have been" layout — the same trick tools like Punto Switcher use.
+---
+
+## What's in here
+
+| Tool | File | What it does |
+|---|---|---|
+| **Layout Fix** | `index.html` | Undoes text typed in the wrong keyboard layout |
+| **Romaji → Kana** | `romaji.html` | Converts typed Japanese romaji into hiragana or katakana |
+
+Both are static pages — open them directly in a browser, or serve the folder with anything. No npm install, no bundler, no framework.
+
+---
+
+## Layout Fix
+
+Typed a whole sentence in the wrong keyboard layout and only noticed at the end? Paste the garbled result, tell it which two layouts were involved, and it reconstructs what you meant to type.
+
+**How it works:** every layout table maps *physical key positions* to characters. Converting a piece of text just means: for each character, find the physical key that produced it in the layout you were typing in, then read off what that same key produces in the layout you meant to use. It's the same trick tools like Punto Switcher use — no dictionaries, no guessing, purely mechanical and reversible.
+
+```
+"l;ylfu"  typed as US-QWERTY, meant as Thai   →  "สวัสดี"
+"ghbdtn"  typed as US-QWERTY, meant as Russian →  "привет"
+```
 
 ### Supported layouts
 
-- English (US QWERTY)
-- Thai (Kedmanee)
-- German (QWERTZ)
-- Russian (ЙЦУКЕН)
-- Ukrainian (ЙЦУКЕН)
-- French (AZERTY)
-- Spanish (QWERTY ES)
-- Hebrew
+English (US QWERTY) · Thai (Kedmanee) · German (QWERTZ) · Russian (ЙЦУКЕН) · Ukrainian (ЙЦУКЕН) · French (AZERTY) · Spanish (QWERTY ES) · Hebrew
 
-## Usage
-
-Open `index.html` in a browser, or serve the folder statically — no build step, no dependencies beyond a Google Fonts import.
+### Using it
 
 1. Paste the garbled text into the left box.
-2. Set "Typed as" and "Should have been" to the two layouts involved.
-3. Click **Convert**, or click **Auto-detect direction** if you're not sure which way round they should be.
-4. **Copy result** to grab the fixed text.
+2. Set **Typed as** and **Should have been** to the two layouts involved.
+3. Click **Convert** — or **Auto-detect direction** if you're not sure which way round they go.
+4. **Copy result**.
 
-## Romaji → Kana (`romaji.html`)
+### Adding a layout
 
-Type Japanese in romaji, get hiragana or katakana. Handles the standard Hepburn typing conventions: doubled consonants (`kitte` → きって), ん before a consonant or at word-end, `nn`/`n'` for an explicit ん before a vowel, and — in katakana — contracts repeated vowels into the long-vowel mark (`kyuuto` → キュート).
+Every layout in `layouts.js` is two 47-character arrays — `unshifted` and `shifted` — lined up against the shared `SLOTS` physical-key order. Drop a new entry into the `LAYOUTS` object with your layout's characters in the same 47 positions and it shows up in both dropdowns automatically. No other code changes needed.
 
-**Mandarin pinyin isn't included.** Kana conversion works because romaji-to-kana is a direct, unambiguous mapping. Pinyin isn't: a single syllable maps to many unrelated Chinese characters (`ma` → 妈/麻/马/骂, among others), so converting it properly needs a dictionary and a way to pick between candidates — a genuinely different tool, not an extension of this one.
+---
+
+## Romaji → Kana
+
+Type Japanese the way you would on any English keyboard; get proper kana back.
+
+```
+konnichiwa  →  こんにちは
+kitte       →  きって      (doubled consonant → small っ)
+gen'in      →  げんいん    (apostrophe forces an explicit ん)
+kyuuto      →  キュート    (katakana contracts repeated vowels into ー)
+```
+
+Handles the standard Hepburn conventions: doubled consonants → small tsu, ん before a consonant or at word-end, `nn` / `n'` for an explicit ん before a vowel, and — in katakana only — repeated vowels contract into the long-vowel mark.
+
+**Why no Mandarin pinyin?** Kana conversion works because romaji → kana is a direct, one-to-one mapping. Pinyin isn't: a single syllable maps to several unrelated Chinese characters (`ma` → 妈 / 麻 / 马 / 骂, depending on tone and meaning), so a real converter needs a dictionary and a candidate picker — a genuinely different kind of tool, not an extension of this one.
+
+---
 
 ## Project structure
 
 ```
 index.html      Layout Fix page
 romaji.html     Romaji → Kana page
-style.css       shared styling (both pages)
-theme.js        shared light/dark/system toggle (both pages)
-layouts.js      keyboard mapping data + conversion logic
+style.css       shared styling + light/dark/system theme (both pages)
+theme.js        theme toggle logic (both pages)
+layouts.js      keyboard layout tables + conversion engine
 script.js       Layout Fix UI wiring
 kana-data.js    Hepburn romaji → kana lookup table
 kana.js         romaji → kana conversion engine
+LICENSE         MIT
+NOTICE.md       third-party font licensing
 ```
 
-## Adding a layout
+---
 
-Each layout in `layouts.js` is just two 47-character arrays (`unshifted` and `shifted`) lined up against the shared `SLOTS` physical key order. Add a new entry to the `LAYOUTS` object with your layout's characters in the same 47 positions, and it will appear in the dropdowns automatically — no other code changes needed.
+## Testing
+
+Both engines are covered by a self-checking test suite (not included in the deployed site — run these yourself with Node):
+
+- **Layout Fix:** 117 tests — full-charset round-trips for every layout, known-word spot checks, randomized round-trips, and a structural scan for duplicate table entries (the one class of bug that silently breaks a round-trip).
+- **Romaji → Kana:** 342 tests — every table entry verified in isolation, ~30 hand-checked real words, 20 katakana loanwords exercising the long-vowel rule, and mechanical sokuon/ん-rule coverage across all consonants.
+
+If you change a mapping table, re-run the equivalent checks before opening a PR.
+
+---
 
 ## Known limitations
 
-The Thai, German, Ukrainian, French, and Spanish mappings cover the common letter/number keys accurately. A handful of rare shifted symbol keys (some Thai tone-mark positions, German/French AltGr characters, Spanish accent/dead-keys) were built from reference rather than verified on physical hardware, and may be slightly off.
+- **Rare shifted symbols** (Thai tone-mark positions, German/French AltGr characters, Spanish accent/dead-keys) were built from reference material rather than verified on physical hardware and may be slightly off. A few obscure Thai shift-row slots use placeholder Thai punctuation (๛ ๏ ๚ ๎) where the true value wasn't reliably known — this keeps every key round-trip-safe instead of risking silent data loss on a guess.
+- **Hebrew has no letter case.** Converting mixed-case Latin text through Hebrew and back loses capitalization (`Hello` and `hello` land on the same key) — this matches a real Hebrew keyboard, not a bug. The same applies to a few US shift-symbols (`:` `"` `<` `>`) whose physical keys are reassigned to Hebrew letters.
+- **A couple of very common Japanese words** (こんにちは, こんばんは) are spelled with は rather than phonetic わ; these are handled as explicit whole-word exceptions since no phonetic rule can derive them.
 
-Hebrew has no letter case, so converting mixed-case Latin text through Hebrew and back loses capitalization (`Hello` and `hello` both land on the same Hebrew keys) — this reflects the real keyboard, not a bug. The same applies to a few US shift-symbols (`:` `"` `<` `>`) whose physical keys are reassigned to Hebrew letters — they're simply not reachable from Hebrew mode, same as on a real Hebrew keyboard.
+Spot something off? Open an issue or PR.
 
-A handful of rare Thai shift-row symbols use placeholder Thai punctuation marks (๛ ๏ ๚ ๎) instead of their true values, which weren't reliably known — this keeps every key round-trip-safe rather than guessing and risking silent data loss.
-
-Open an issue or PR if you spot a mapping error.
+---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
-
-The Google Fonts imported in `style.css` (Space Grotesk, JetBrains Mono) are licensed separately under the [SIL Open Font License](https://openfontlicense.org/); they're loaded from Google's CDN, not bundled in this repo.
+MIT — see [LICENSE](LICENSE). Third-party font licensing is in [NOTICE.md](NOTICE.md).
