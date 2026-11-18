@@ -10,7 +10,7 @@ Two small, dependency-free browser tools for a keyboard gone wrong. Everything r
 ![No build step](https://img.shields.io/badge/build%20step-none-brightgreen)
 ![Pure JS](https://img.shields.io/badge/dependencies-zero-blue)
 
-**[Open the site →](https://unknown-x0.github.io/OopsWrongLayout/)**
+**[Open the site →](https://unknown-x0.github.io/Oops-Wrong-Layout/)**
 
 ---
 
