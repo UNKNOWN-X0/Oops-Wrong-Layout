@@ -2,26 +2,20 @@
 
 <img src="icons/icon-512.png" alt="" width="96" align="right">
 
-Two small, dependency-free browser tools for a keyboard gone wrong. Everything runs in your browser: nothing you type is sent anywhere.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Live site](https://img.shields.io/badge/live%20site-GitHub%20Pages-2ea44f?logo=github)](https://unknown-x0.github.io/Oops-Wrong-Layout/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![HTML5](https://img.shields.io/badge/HTML5-CSS3-orange)](https://developer.mozilla.org/)
-![No build step](https://img.shields.io/badge/build%20step-none-brightgreen)
-![Pure JS](https://img.shields.io/badge/dependencies-zero-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+Two small, dependency-free browser tools for a keyboard gone wrong: fix text typed under the wrong keyboard layout, or turn Japanese romaji into kana. Everything runs in your browser: nothing you type is sent anywhere.
 
 **[Open the site →](https://unknown-x0.github.io/Oops-Wrong-Layout/)**
 
----
+## What's inside
 
-## What's in here
-
-| Tool              | File          | What it does                                             |
-| ----------------- | ------------- | -------------------------------------------------------- |
-| **Layout Fix**    | `index.html`  | Undoes text typed in the wrong keyboard layout           |
+| Tool | File | What it does |
+| --- | --- | --- |
+| **Layout Fix** | `index.html` | Undoes text typed in the wrong keyboard layout |
 | **Romaji → Kana** | `romaji.html` | Converts typed Japanese romaji into hiragana or katakana |
-
-Both are static pages — open them directly in a browser, or serve the folder with anything. No npm install, no bundler, no framework.
 
 Both pages share one interface:
 
@@ -30,7 +24,9 @@ Both pages share one interface:
 - **Display settings.** Choose **Mode** (System, Light, Dark) and **Paper**, the coloring: Parchment, Carbon Copy, Ledger Green, Blueprint or Kraft, each with a light and a dark version. Both choices are remembered on your device.
 - **Made for every screen.** On phones the keyboard splits into two half-boards; everything works by keyboard and with reduced motion.
 
----
+## Getting started
+
+Open the [live site](https://unknown-x0.github.io/Oops-Wrong-Layout/), or open `index.html` (Layout Fix) or `romaji.html` (Romaji → Kana) directly in a browser. Both are static pages: no npm install, no bundler, no framework.
 
 ## Layout Fix
 
@@ -38,7 +34,7 @@ Typed a whole sentence in the wrong keyboard layout and only noticed at the end?
 
 **How it works:** every layout table maps _physical key positions_ to characters. Converting a piece of text just means: for each character, find the physical key that produced it in the layout you were typing in, then read off what that same key produces in the layout you meant to use. It's the same trick tools like Punto Switcher use — no dictionaries, no guessing, purely mechanical and reversible.
 
-```
+```text
 "l;ylfu"  typed as US-QWERTY, meant as Thai   →  "สวัสดี"
 "ghbdtn"  typed as US-QWERTY, meant as Russian →  "привет"
 ```
@@ -58,13 +54,11 @@ English (US QWERTY) · Thai (Kedmanee) · German (QWERTZ) · Russian (ЙЦУКЕ
 
 Every layout in `layouts.js` is two 47-character arrays — `unshifted` and `shifted` — lined up against the shared `SLOTS` physical-key order. Drop a new entry into the `LAYOUTS` object with your layout's characters in the same 47 positions and it shows up in both pickers and on the key map automatically. [STANDARDS.md](STANDARDS.md#layout-data) lists what a new layout ships with (tests, script detection, docs).
 
----
-
 ## Romaji → Kana
 
 Type Japanese the way you would on any English keyboard; get proper kana back.
 
-```
+```text
 konnichiwa  →  こんにちは
 kitte       →  きって      (doubled consonant → small っ)
 gen'in      →  げんいん    (apostrophe forces an explicit ん)
@@ -75,11 +69,30 @@ Handles the standard Hepburn conventions: doubled consonants → small tsu, ん 
 
 **Why no Mandarin pinyin?** Kana conversion works because romaji → kana is a direct, one-to-one mapping. Pinyin isn't: a single syllable maps to several unrelated Chinese characters (`ma` → 妈 / 麻 / 马 / 骂, depending on tone and meaning), so a real converter needs a dictionary and a candidate picker — a genuinely different kind of tool, not an extension of this one.
 
----
+## Known limitations
+
+- **Rare shifted symbols** (Thai tone-mark positions, German/French AltGr characters, Spanish accent/dead-keys) were built from reference material rather than verified on physical hardware and may be slightly off. A few obscure Thai shift-row slots use placeholder Thai punctuation (๛ ๏ ๚ ๎) where the true value wasn't reliably known — this keeps every key round-trip-safe instead of risking silent data loss on a guess.
+- **Hebrew has no letter case.** Converting mixed-case Latin text through Hebrew and back loses capitalization (`Hello` and `hello` land on the same key) — this matches a real Hebrew keyboard, not a bug. The same applies to a few US shift-symbols (`:` `"` `<` `>`) whose physical keys are reassigned to Hebrew letters.
+- **A couple of very common Japanese words** (こんにちは, こんばんは) are spelled with は rather than phonetic わ; these are handled as explicit whole-word exceptions since no phonetic rule can derive them. They apply only when the word is the whole input: inside a sentence, `konnichiwa` is spelled phonetically (こんにちわ).
+- **The key map shows unshifted legends.** A shifted character (a capital letter, a Thai shift-row mark) lights the correct key, but the key shows its unshifted characters.
+
+Spot something off? Open an issue or PR.
+
+## Tests
+
+The conversion engines have tests that run with Node 18 or newer and need no install:
+
+```sh
+node --test tests/*.test.cjs
+```
+
+They check that every layout covers all 47 keys with no duplicate characters, that each layout's characters survive a round trip through every other layout, the README's known words, pass-through of off-keyboard characters, and the Hepburn spelling rules. The interface is checked in Chromium and WebKit at phone, tablet and desktop widths; [STANDARDS.md](STANDARDS.md#definition-of-done) has the full definition of done.
+
+If you change a mapping table, run the tests before opening a PR.
 
 ## Project structure
 
-```
+```text
 index.html        Layout Fix page
 romaji.html       Romaji → Kana page (its page script is inline)
 style.css         shared styling: five papers, each in light and dark
@@ -104,38 +117,9 @@ tests/            engine tests (Node's built-in runner)
 | [ROADMAP.md](ROADMAP.md) | Where the project is heading next |
 | [NOTICE.md](NOTICE.md) | Third-party font and logo-glyph licences |
 
----
-
-## Testing
-
-The conversion engines have tests that run with Node 18 or newer and need no install:
-
-```
-node --test tests/*.test.cjs
-```
-
-They check that every layout covers all 47 keys with no duplicate characters, that each layout's characters survive a round trip through every other layout, the README's known words, pass-through of off-keyboard characters, and the Hepburn spelling rules. The interface is checked in Chromium and WebKit at phone, tablet and desktop widths; [STANDARDS.md](STANDARDS.md#definition-of-done) has the full definition of done.
-
-If you change a mapping table, run the tests before opening a PR.
-
----
-
-## Known limitations
-
-- **Rare shifted symbols** (Thai tone-mark positions, German/French AltGr characters, Spanish accent/dead-keys) were built from reference material rather than verified on physical hardware and may be slightly off. A few obscure Thai shift-row slots use placeholder Thai punctuation (๛ ๏ ๚ ๎) where the true value wasn't reliably known — this keeps every key round-trip-safe instead of risking silent data loss on a guess.
-- **Hebrew has no letter case.** Converting mixed-case Latin text through Hebrew and back loses capitalization (`Hello` and `hello` land on the same key) — this matches a real Hebrew keyboard, not a bug. The same applies to a few US shift-symbols (`:` `"` `<` `>`) whose physical keys are reassigned to Hebrew letters.
-- **A couple of very common Japanese words** (こんにちは, こんばんは) are spelled with は rather than phonetic わ; these are handled as explicit whole-word exceptions since no phonetic rule can derive them. They apply only when the word is the whole input: inside a sentence, `konnichiwa` is spelled phonetically (こんにちわ).
-- **The key map shows unshifted legends.** A shifted character (a capital letter, a Thai shift-row mark) lights the correct key, but the key shows its unshifted characters.
-
-Spot something off? Open an issue or PR.
-
----
-
 ## Contributing
 
 Read [STANDARDS.md](STANDARDS.md) first: it covers the module boundaries, the rules for layout and kana data, the interface rules, and the checks a change has to pass. Ideas for what to build next are in [ROADMAP.md](ROADMAP.md).
-
----
 
 ## License
 
