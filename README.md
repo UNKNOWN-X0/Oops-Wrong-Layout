@@ -131,7 +131,7 @@ assets/preview.png  Screenshot for this README
 | [PRODUCT.md](PRODUCT.md) | Who the tools are for and what they must never claim |
 | [DESIGN.md](DESIGN.md) | The visual system: tokens, type, components, motion |
 | [STANDARDS.md](STANDARDS.md) | Engineering and quality rules, and the definition of done |
-| [ROADMAP.md](ROADMAP.md) | Where the project is heading next |
+| [ROADMAP.md](ROADMAP.md) | Where the project is heading next, with an issue per item |
 | [NOTICE.md](NOTICE.md) | Third-party font and logo-glyph licences |
 
 ## Contributing
