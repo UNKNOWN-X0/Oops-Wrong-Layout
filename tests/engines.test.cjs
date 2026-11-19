@@ -33,8 +33,7 @@ test("no layout maps two keys to the same character (that breaks round trips)", 
     const all = [...LAYOUTS[key].unshifted, ...LAYOUTS[key].shifted];
     const seen = new Map();
     for (const [i, ch] of all.entries()) {
-      // Letter case collapsing onto one key (Hebrew) is a documented exception.
-      if (seen.has(ch) && !(key === "hebrew")) {
+      if (seen.has(ch)) {
         assert.fail(`${key}: "${ch}" appears at positions ${seen.get(ch)} and ${i}`);
       }
       seen.set(ch, i);
@@ -46,7 +45,7 @@ test("each layout's own characters survive a round trip through every other layo
   for (const from of keys) {
     const text = [...LAYOUTS[from].unshifted, ...LAYOUTS[from].shifted].join("");
     for (const to of keys) {
-      if (from === to || from === "hebrew" || to === "hebrew") continue; // Hebrew: see README limits
+      if (from === to) continue;
       const there = convertText(text, from, to).text;
       const back = convertText(there, to, from).text;
       assert.equal(back, text, `${from} → ${to} → ${from}`);
@@ -90,4 +89,14 @@ test("romaji → kana follows the Hepburn rules the page documents", () => {
 
 test("letters that form no syllable are left as Latin", () => {
   assert.equal(romajiToKana("qx", "hiragana"), "qx");
+});
+
+test("Hebrew keeps letter case: Shift gives Latin capitals, as real Hebrew keyboards do", () => {
+  assert.equal(convertText("Hello", "us", "hebrew").text, "Hקךךם");
+  assert.equal(convertText("Hקךךם", "hebrew", "us").text, "Hello");
+});
+
+test("Thai shift row matches the Kedmanee standard", () => {
+  // Shift + ` i o [ ] j n / on Kedmanee (TIS 820-2538, as xkeyboard-config th(basic) and Windows ship it).
+  assert.equal(convertText("~IO{}JN?", "us", "thai").text, "%ณฯฐ,๋์ฦ");
 });

@@ -34,7 +34,8 @@ These hold for every feature, old or new.
 ## Layout data
 
 - Every layout has exactly 47 `unshifted` and 47 `shifted` characters, aligned to `SLOTS` (US key geometry).
-- No character appears twice within one layout (Hebrew letter case is the documented exception). A duplicate silently breaks round trips.
+- No character appears twice within one layout. A duplicate silently breaks round trips.
+- Unshifted and shifted characters match the platform layouts (xkeyboard-config `symbols/<layout>`, or a named Windows or macOS layout when they differ, recorded in the README).
 - Where a key's true character is unknown, use a distinct placeholder and document it in the README's known limitations rather than guessing.
 - A new layout ships with: its `LAYOUTS` entry, a `label`, a known-word case in `tests/engines.test.cjs`, a `scriptScore` range if it uses a non-Latin script, and a README line under supported layouts.
 

@@ -77,8 +77,7 @@ Handles the standard Hepburn conventions: doubled consonants → small tsu, ん 
 
 ### Known limitations
 
-- **Rare shifted symbols** (Thai tone-mark positions, German/French AltGr characters, Spanish accent/dead-keys) were built from reference material rather than verified on physical hardware and may be slightly off. A few obscure Thai shift-row slots use placeholder Thai punctuation (๛ ๏ ๚ ๎) where the true value wasn't reliably known — this keeps every key round-trip-safe instead of risking silent data loss on a guess.
-- **Hebrew has no letter case.** Converting mixed-case Latin text through Hebrew and back loses capitalization (`Hello` and `hello` land on the same key) — this matches a real Hebrew keyboard, not a bug. The same applies to a few US shift-symbols (`:` `"` `<` `>`) whose physical keys are reassigned to Hebrew letters.
+- **Only two levels per key.** Each layout holds a key's unshifted and shifted characters, which match the xkeyboard-config definitions for every layout. AltGr characters (German `@ € {}`, French `€ ~ #`, Spanish `@ #`) are not modelled, so text typed with AltGr passes through unconverted. Ukrainian Shift + ` gives ₴, as Microsoft's "Ukrainian (Enhanced)" layout does (xkeyboard-config has ʼ there).
 - **A couple of very common Japanese words** (こんにちは, こんばんは) are spelled with は rather than phonetic わ; these are handled as explicit whole-word exceptions since no phonetic rule can derive them. They apply only when the word is the whole input: inside a sentence, `konnichiwa` is spelled phonetically (こんにちわ).
 - **The key map shows unshifted legends.** A shifted character (a capital letter, a Thai shift-row mark) lights the correct key, but the key shows its unshifted characters.
 
