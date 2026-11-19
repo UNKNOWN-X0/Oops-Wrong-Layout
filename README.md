@@ -10,6 +10,8 @@ Two small, dependency-free browser tools for a keyboard gone wrong: fix text typ
 
 **[Open Oops/Wrong Layout →](https://unknown-x0.github.io/Oops-Wrong-Layout/)**
 
+![Oops/Wrong Layout](assets/preview.png)
+
 ## Features
 
 - **Layout Fix (`index.html`):** undoes text typed in the wrong keyboard layout, across eight layouts.
@@ -107,18 +109,19 @@ If you change a mapping table, run the tests before opening a PR.
 ## Project structure
 
 ```text
-index.html        Layout Fix page
-romaji.html       Romaji → Kana page (its page script is inline)
-style.css         shared styling: five papers, each in light and dark
-theme.js          Display settings: Mode and Paper
-custom-select.js  styled layout pickers (the hidden <select> keeps the value)
-typewriter.js     typed-out result, key strikes and Copy (both pages)
-script.js         Layout Fix wiring and the key map
-layouts.js        keyboard layout tables + conversion engine
-kana-data.js      Hepburn romaji → kana lookup table
-kana.js           romaji → kana conversion engine
-icons/            keycap logo: favicon.svg plus PNG sizes
-tests/            engine tests (Node's built-in runner)
+index.html          Layout Fix page
+romaji.html         Romaji → Kana page (its page script is inline)
+style.css           shared styling: five papers, each in light and dark
+theme.js            Display settings: Mode and Paper
+custom-select.js    styled layout pickers (the hidden <select> keeps the value)
+typewriter.js       typed-out result, key strikes and Copy (both pages)
+script.js           Layout Fix wiring and the key map
+layouts.js          keyboard layout tables + conversion engine
+kana-data.js        Hepburn romaji → kana lookup table
+kana.js             romaji → kana conversion engine
+icons/              keycap logo: favicon.svg plus PNG sizes
+tests/              engine tests (Node's built-in runner)
+assets/preview.png  Screenshot for this README
 ```
 
 ## Project documents

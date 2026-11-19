@@ -13,7 +13,7 @@ The rules every change to Oops/Wrong Layout has to meet, and how to check them. 
 
 When two files disagree, the owner above wins and the other is fixed.
 
-## Product invariants
+## Invariants
 
 These hold for every feature, old or new.
 
@@ -71,14 +71,24 @@ These hold for every feature, old or new.
 - Controls name their action ("Copy", "Swap layouts", "Auto-detect direction"). Messages name the problem and the way forward.
 - Make no claims the engines cannot back (see Product invariants).
 
+## Lessons
+
+None yet.
+
+## Checks
+
+Run these in order for every change:
+
+1. **Engine tests:** `node --test tests/*.test.cjs` (also run by the workspace's **Test: all projects** task).
+2. **Pages load cleanly** in the workspace browser smoke test (**Browser: smoke test web apps**): no console errors on either page.
+3. **Chromium and WebKit** at 390, 820 and 1440 px for anything visual or interactive. WebKit matters because the main user browses in Safari.
+4. **Design check:** `impeccable detect --json index.html romaji.html style.css` reports nothing, or each remaining finding is a documented exception.
+5. **Project graph:** refresh it with the workspace's `scripts/refresh-graph.sh --changed`.
+
 ## Definition of done
 
 A change is finished when all of these hold:
 
-1. **Engine tests pass:** `node --test tests/*.test.cjs` (also run by the workspace's **Test: all projects** task).
-2. **Pages load cleanly** in the workspace browser smoke test (**Browser: smoke test web apps**): no console errors on either page.
-3. **Checked in Chromium and WebKit** at 390, 820 and 1440 px for anything visual or interactive. WebKit matters because the main user browses in Safari.
-4. **Design check:** `impeccable detect --json index.html romaji.html style.css` reports nothing, or each remaining finding is a documented exception.
-5. **Docs match the code:** README, PRODUCT.md, DESIGN.md and this file are updated in the same change when behaviour, design tokens or rules change.
-6. **Project graph refreshed** with the workspace's `scripts/refresh-graph.sh --changed`.
-7. **Commit message** is imperative, says what changed and why, and keeps unrelated work out.
+- **Checks:** every check above passed, or the report says which did not run and why.
+- **Docs match the code:** README, PRODUCT.md, DESIGN.md and this file are updated in the same change when behaviour, design tokens or rules change.
+- **Commit message** is imperative, says what changed and why, and keeps unrelated work out.
