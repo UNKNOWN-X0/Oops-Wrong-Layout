@@ -30,8 +30,6 @@ Make the tools better at their job.
 
 **Sentence-aware kana exceptions** (stated 2026-11-12, [#8](https://github.com/UNKNOWN-X0/Oops-Wrong-Layout/issues/8)). `konnichiwa` becomes こんにちは only when it is the whole input; inside a sentence it is spelled phonetically. Applying the whole-word exceptions per word fixes that without changing the Hepburn rules. *Done when* `konnichiwa sensei` gives こんにちは せんせい.
 
-**Verified shifted symbols** (stated 2026-11-19, [#13](https://github.com/UNKNOWN-X0/Oops-Wrong-Layout/issues/13)). Rare shifted and AltGr symbols were never checked on hardware, and a few Thai shift-row slots are placeholders, so some conversions may be silently wrong.
-
 ## Later
 
 Reach more people.
