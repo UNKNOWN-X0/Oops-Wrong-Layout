@@ -1,15 +1,17 @@
-# Graph Report - OopsWrongLayout  (2026-11-12)
+# Graph Report - Oops-Wrong-Layout  (2026-11-19)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 18 files · ~24,442 words
+- Verdict: corpus is large enough that graph structure adds value.
+- Unclassified: 4 file(s) not represented in the graph (top: (none) 3, .css 1)
 
 ## Summary
-- 177 nodes · 196 edges · 17 communities (14 shown, 3 thin omitted)
+- 179 nodes · 198 edges · 16 communities (13 shown, 3 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 7 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bd518ba7`
+- Built from commit: `5941dcac`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,13 +31,12 @@
 - Typed-Out Result and Copy
 - Design Direction Contract
 - Layout Picker (Custom Select)
-- Product Roadmap
 
 ## God Nodes (most connected - your core abstractions)
 1. `Components` - 13 edges
-2. `Product` - 9 edges
-3. `Design System: Oops/Wrong Layout` - 9 edges
-4. `Project standards` - 9 edges
+2. `Project standards` - 11 edges
+3. `Product` - 9 edges
+4. `Design System: Oops/Wrong Layout` - 9 edges
 5. `doConvert()` - 7 edges
 6. `enhanceSelect()` - 7 edges
 7. `README` - 7 edges
@@ -58,7 +59,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (17 total, 3 thin omitted)
+## Communities (16 total, 3 thin omitted)
 
 ### Community 0 - "GitHub Pages Build Workflow"
 Cohesion: 0.14
@@ -69,16 +70,16 @@ Cohesion: 0.17
 Nodes (18): autoDetect(), calm, caps, doConvert(), els, KB_ROWS, legend(), onLayoutChange() (+10 more)
 
 ### Community 2 - "Project Docs and Agent Notes"
-Cohesion: 0.19
-Nodes (8): Local workflow, Project data, Project instructions, Google Fonts SIL Open Font License notices, Romaji-to-kana tests, README, Keyboard layout round-trip tests, Dependency-free static browser tools
+Cohesion: 0.11
+Nodes (14): Local workflow, Project data, Project instructions, Google Fonts SIL Open Font License notices, Romaji-to-kana tests, README, Keyboard layout round-trip tests, Dependency-free static browser tools (+6 more)
 
 ### Community 3 - "Design System Overview"
 Cohesion: 0.11
 Nodes (19): Colors, Design System: Oops/Wrong Layout, Do:, Do's and Don'ts, Don't:, Elevation & Depth, Hierarchy, Layout (+11 more)
 
 ### Community 4 - "Layout Engine and Project Rules"
-Cohesion: 0.13
-Nodes (12): LAYOUTS, scriptScore(), SLOTS, Accessibility, Code, Copy, Definition of done, Interface (+4 more)
+Cohesion: 0.12
+Nodes (14): LAYOUTS, scriptScore(), SLOTS, Accessibility, Checks, Code, Copy, Definition of done (+6 more)
 
 ### Community 5 - "Display Settings (Mode and Paper)"
 Cohesion: 0.14
@@ -112,29 +113,25 @@ Nodes (6): createTypewriter(), set(), show(), stop(), reducedMotion, splitGraphe
 Cohesion: 0.39
 Nodes (7): enhanceSelect(), choose(), close(), open(), setActive(), sync(), typeahead()
 
-### Community 16 - "Product Roadmap"
-Cohesion: 0.29
-Nodes (6): Direction, Later: reach more people, Next: make the tools better at their job, Not planned, Now: foundations, Roadmap
-
 ## Knowledge Gaps
 - **7 isolated node(s):** `Romaji-to-kana tests`, `Keyboard layout round-trip tests`, `Auto-detect conversion direction`, `Keyboard layout tables`, `Layout Fix page` (+2 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 108 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 110 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Design System: Oops/Wrong Layout` connect `Design System Overview` to `Project Docs and Agent Notes`, `Design Components and Motion`?**
-  _High betweenness centrality (0.114) - this node is a cross-community bridge._
+  _High betweenness centrality (0.116) - this node is a cross-community bridge._
 - **What connects `Romaji-to-kana tests`, `Keyboard layout round-trip tests`, `Auto-detect conversion direction` to the rest of the system?**
   _7 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `GitHub Pages Build Workflow` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
 - **Why does `Project standards` connect `Layout Engine and Project Rules` to `Project Docs and Agent Notes`?**
-  _High betweenness centrality (0.061) - this node is a cross-community bridge._
-- **Should `Design System Overview` be split into smaller, more focused modules?**
-  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
+  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+- **Should `Project Docs and Agent Notes` be split into smaller, more focused modules?**
+  _Cohesion score 0.11428571428571428 - nodes in this community are weakly interconnected._
 - **Why does `Components` connect `Design Components and Motion` to `Design System Overview`?**
   _High betweenness centrality (0.054) - this node is a cross-community bridge._
-- **Should `Layout Engine and Project Rules` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Design System Overview` be split into smaller, more focused modules?**
+  _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._

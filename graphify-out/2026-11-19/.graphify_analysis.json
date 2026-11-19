@@ -1,0 +1,380 @@
+{
+  "communities": {
+    "0": [
+      "github_workflows_jekyll_docker",
+      "github_workflows_jekyll_docker_build_runs_on",
+      "github_workflows_jekyll_docker_build_steps",
+      "github_workflows_jekyll_docker_jobs",
+      "github_workflows_jekyll_docker_jobs_build",
+      "github_workflows_jekyll_docker_name",
+      "github_workflows_jekyll_docker_pull_request_branches",
+      "github_workflows_jekyll_docker_push_branches",
+      "github_workflows_jekyll_docker_steps_name",
+      "github_workflows_jekyll_docker_steps_run",
+      "github_workflows_jekyll_docker_steps_uses",
+      "github_workflows_jekyll_docker_true",
+      "github_workflows_jekyll_docker_true_pull_request",
+      "github_workflows_jekyll_docker_true_push"
+    ],
+    "1": [
+      "script",
+      "script_autodetect",
+      "script_calm",
+      "script_caps",
+      "script_doconvert",
+      "script_els",
+      "script_homerow",
+      "script_kb_rows",
+      "script_legend",
+      "script_onlayoutchange",
+      "script_plural",
+      "script_populateselects",
+      "script_renderkeyboard",
+      "script_replay",
+      "script_setstatus",
+      "script_shortname",
+      "script_sourceslots",
+      "script_strike",
+      "script_swaplayouts",
+      "script_updatekeyheat",
+      "script_writer"
+    ],
+    "2": [
+      "agents",
+      "agents_local_workflow",
+      "agents_project_data",
+      "agents_project_instructions",
+      "design",
+      "notice_google_fonts_licenses",
+      "product",
+      "readme_kana_conversion_tests",
+      "readme_keyboard_layout_limitations",
+      "readme_no_pinyin_dictionary",
+      "readme_readme",
+      "readme_round_trip_tests",
+      "readme_static_dependency_free_pages",
+      "standards"
+    ],
+    "3": [
+      "design_colors",
+      "design_design_system_oops_wrong_layout",
+      "design_do",
+      "design_do_s_and_don_ts",
+      "design_don_t",
+      "design_elevation_depth",
+      "design_hierarchy",
+      "design_layout",
+      "design_named_rules",
+      "design_named_rules_367",
+      "design_named_rules_386",
+      "design_named_rules_399",
+      "design_neutral",
+      "design_overview",
+      "design_primary",
+      "design_shadow_vocabulary",
+      "design_shapes",
+      "design_tertiary",
+      "design_typography"
+    ],
+    "4": [
+      "layouts",
+      "layouts_buildreverseindex",
+      "layouts_converttext",
+      "layouts_layouts",
+      "layouts_scriptscore",
+      "layouts_slots",
+      "standards_accessibility",
+      "standards_code",
+      "standards_copy",
+      "standards_definition_of_done",
+      "standards_interface",
+      "standards_kana_data",
+      "standards_layout_data",
+      "standards_product_invariants",
+      "standards_project_standards"
+    ],
+    "5": [
+      "theme",
+      "theme_btn",
+      "theme_buildpanel",
+      "theme_closepanel",
+      "theme_darkquery",
+      "theme_load",
+      "theme_memory",
+      "theme_mode_icons",
+      "theme_modes",
+      "theme_motionoff",
+      "theme_openpanel",
+      "theme_panel",
+      "theme_papers",
+      "theme_render",
+      "theme_repaint",
+      "theme_state",
+      "theme_store",
+      "theme_synccontrols"
+    ],
+    "6": [
+      "index_html_layout_fix_page",
+      "readme_auto_detect_direction",
+      "readme_keyboard_layout_tables",
+      "readme_layout_fix",
+      "readme_physical_key_remapping"
+    ],
+    "7": [
+      "kana_data",
+      "kana_data_kana_table",
+      "kana_data_sokuon_consonants"
+    ],
+    "8": [
+      "readme_hepburn_rules",
+      "readme_romaji_kana",
+      "romaji_html_romaji_kana_page"
+    ],
+    "9": [
+      "kana",
+      "kana_romajitokana"
+    ],
+    "10": [
+      "ref_node_assert",
+      "ref_node_fs",
+      "ref_node_path",
+      "ref_node_test",
+      "ref_node_vm",
+      "tests_engines_test",
+      "tests_engines_test_assert",
+      "tests_engines_test_fs",
+      "tests_engines_test_keys",
+      "tests_engines_test_layouts_slots_converttext_scriptscore_romajitokana",
+      "tests_engines_test_path",
+      "tests_engines_test_root",
+      "tests_engines_test_sandbox",
+      "tests_engines_test_test",
+      "tests_engines_test_vm"
+    ],
+    "11": [
+      "design_buttons",
+      "design_code_table_signature",
+      "design_components",
+      "design_copied_slip",
+      "design_display_settings",
+      "design_footer_credit",
+      "design_inputs_fields",
+      "design_motion",
+      "design_named_rules_474",
+      "design_navigation",
+      "design_pane_frame",
+      "design_status_line",
+      "design_typed_out_result"
+    ],
+    "12": [
+      "product_capabilities_and_constraints",
+      "product_evidence_on_hand",
+      "product_operating_context",
+      "product_platform",
+      "product_positioning",
+      "product_product",
+      "product_product_principles",
+      "product_product_purpose",
+      "product_users"
+    ],
+    "13": [
+      "typewriter",
+      "typewriter_createtypewriter",
+      "typewriter_createtypewriter_set",
+      "typewriter_createtypewriter_show",
+      "typewriter_createtypewriter_stop",
+      "typewriter_reducedmotion",
+      "typewriter_splitgraphemes",
+      "typewriter_wirecopy"
+    ],
+    "14": [
+      "impeccable_surfaces_index_html",
+      "impeccable_surfaces_index_html_direction_contract",
+      "impeccable_surfaces_index_html_layout_fix_and_romaji_kana"
+    ],
+    "15": [
+      "custom_select",
+      "custom_select_enhanceselect",
+      "custom_select_enhanceselect_choose",
+      "custom_select_enhanceselect_close",
+      "custom_select_enhanceselect_open",
+      "custom_select_enhanceselect_setactive",
+      "custom_select_enhanceselect_sync",
+      "custom_select_enhanceselect_typeahead"
+    ],
+    "16": [
+      "roadmap",
+      "roadmap_direction",
+      "roadmap_later_reach_more_people",
+      "roadmap_next_make_the_tools_better_at_their_job",
+      "roadmap_not_planned",
+      "roadmap_now_foundations",
+      "roadmap_roadmap"
+    ]
+  },
+  "cohesion": {
+    "0": 0.14285714285714285,
+    "1": 0.16666666666666666,
+    "2": 0.18681318681318682,
+    "3": 0.10526315789473684,
+    "4": 0.13333333333333333,
+    "5": 0.1437908496732026,
+    "6": 0.4,
+    "7": 0.6666666666666666,
+    "8": 0.6666666666666666,
+    "9": 1.0,
+    "10": 0.13333333333333333,
+    "11": 0.15384615384615385,
+    "12": 0.2222222222222222,
+    "13": 0.35714285714285715,
+    "14": 0.6666666666666666,
+    "15": 0.39285714285714285,
+    "16": 0.2857142857142857
+  },
+  "gods": [
+    {
+      "id": "design_components",
+      "label": "Components",
+      "degree": 13
+    },
+    {
+      "id": "product_product",
+      "label": "Product",
+      "degree": 9
+    },
+    {
+      "id": "design_design_system_oops_wrong_layout",
+      "label": "Design System: Oops/Wrong Layout",
+      "degree": 9
+    },
+    {
+      "id": "standards_project_standards",
+      "label": "Project standards",
+      "degree": 9
+    },
+    {
+      "id": "script_doconvert",
+      "label": "doConvert()",
+      "degree": 7
+    },
+    {
+      "id": "custom_select_enhanceselect",
+      "label": "enhanceSelect()",
+      "degree": 7
+    },
+    {
+      "id": "readme_readme",
+      "label": "README",
+      "degree": 7
+    },
+    {
+      "id": "roadmap_roadmap",
+      "label": "Roadmap",
+      "degree": 6
+    },
+    {
+      "id": "script_onlayoutchange",
+      "label": "onLayoutChange()",
+      "degree": 5
+    },
+    {
+      "id": "script_replay",
+      "label": "replay()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Layout data",
+      "target": "scriptScore()",
+      "source_files": [
+        "STANDARDS.md",
+        "layouts.js"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code ↔ doc)"
+    },
+    {
+      "source": "Google Fonts SIL Open Font License notices",
+      "target": "Dependency-free static browser tools",
+      "source_files": [
+        "NOTICE.md",
+        "README.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "README",
+      "target": "Google Fonts SIL Open Font License notices",
+      "source_files": [
+        "README.md",
+        "NOTICE.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "Layout Fix page",
+      "target": "Layout Fix",
+      "source_files": [
+        "index.html",
+        "README.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "implements",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "Romaji to Kana page",
+      "target": "Romaji to kana conversion",
+      "source_files": [
+        "romaji.html",
+        "README.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "implements",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Design System: Oops/Wrong Layout` connect `Design System Overview` to `Project Docs and Agent Notes`, `Design Components and Motion`?",
+      "why": "High betweenness centrality (0.114) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Romaji-to-kana tests`, `Keyboard layout round-trip tests`, `Auto-detect conversion direction` to the rest of the system?",
+      "why": "7 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `GitHub Pages Build Workflow` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Project standards` connect `Layout Engine and Project Rules` to `Project Docs and Agent Notes`?",
+      "why": "High betweenness centrality (0.061) - this node is a cross-community bridge."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Design System Overview` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Components` connect `Design Components and Motion` to `Design System Overview`?",
+      "why": "High betweenness centrality (0.054) - this node is a cross-community bridge."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Layout Engine and Project Rules` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
