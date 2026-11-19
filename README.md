@@ -6,29 +6,37 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-Two small, dependency-free browser tools for a keyboard gone wrong: fix text typed under the wrong keyboard layout, or turn Japanese romaji into kana. Everything runs in your browser: nothing you type is sent anywhere.
+Two small, dependency-free browser tools for a keyboard gone wrong: fix text typed under the wrong keyboard layout, or turn Japanese romaji into kana. Everything runs in your browser.
 
-**[Open the site →](https://unknown-x0.github.io/Oops-Wrong-Layout/)**
+**[Open Oops/Wrong Layout →](https://unknown-x0.github.io/Oops-Wrong-Layout/)**
 
-## What's inside
+## Features
 
-| Tool | File | What it does |
-| --- | --- | --- |
-| **Layout Fix** | `index.html` | Undoes text typed in the wrong keyboard layout |
-| **Romaji → Kana** | `romaji.html` | Converts typed Japanese romaji into hiragana or katakana |
-
-Both pages share one interface:
-
-- **The mechanism on screen.** Layout Fix shows a live **key map**: each key carries the character you typed (top-left) and the one you meant (bottom-right), and the keys your text used light up, the most-used one solid. Romaji → Kana shows a **kana chart** that lights the kana in your result.
-- **Typed out, like a typewriter.** Pasted text types itself into the result while the matching keys strike; Copy confirms with a check and a small "Copied" slip.
-- **Display settings.** Choose **Mode** (System, Light, Dark) and **Paper**, the coloring: Parchment, Carbon Copy, Ledger Green, Blueprint or Kraft, each with a light and a dark version. Both choices are remembered on your device.
-- **Made for every screen.** On phones the keyboard splits into two half-boards; everything works by keyboard and with reduced motion.
+- **Layout Fix (`index.html`):** undoes text typed in the wrong keyboard layout, across eight layouts.
+- **Romaji → Kana (`romaji.html`):** converts typed Japanese romaji into hiragana or katakana.
+- **The mechanism on screen:** Layout Fix shows a live key map, each key carrying the character you typed (top-left) and the one you meant (bottom-right), with the keys your text used lit up; Romaji → Kana lights the kana in your result on a kana chart.
+- **Typed out, like a typewriter:** pasted text types itself into the result while the matching keys strike; Copy confirms with a check and a small "Copied" slip.
+- **Display settings:** Mode (System, Light, Dark) and Paper (Parchment, Carbon Copy, Ledger Green, Blueprint, Kraft), each paper in light and dark, remembered on your device.
+- **Made for every screen:** on phones the keyboard splits into two half-boards; everything works by keyboard and with reduced motion.
 
 ## Getting started
 
-Open the [live site](https://unknown-x0.github.io/Oops-Wrong-Layout/), or open `index.html` (Layout Fix) or `romaji.html` (Romaji → Kana) directly in a browser. Both are static pages: no npm install, no bundler, no framework.
+### Use it online
 
-## Layout Fix
+Open the [live site](https://unknown-x0.github.io/Oops-Wrong-Layout/).
+
+### Run it yourself
+
+Open `index.html` (Layout Fix) or `romaji.html` (Romaji → Kana) directly in a browser. Both are static pages: no npm install, no bundler, no framework.
+
+```sh
+git clone https://github.com/UNKNOWN-X0/Oops-Wrong-Layout.git
+open Oops-Wrong-Layout/index.html
+```
+
+## Usage
+
+### Layout Fix
 
 Typed a whole sentence in the wrong keyboard layout and only noticed at the end? Paste the garbled result, tell it which two layouts were involved, and it reconstructs what you meant to type.
 
@@ -39,22 +47,18 @@ Typed a whole sentence in the wrong keyboard layout and only noticed at the end?
 "ghbdtn"  typed as US-QWERTY, meant as Russian →  "привет"
 ```
 
-### Supported layouts
+#### Supported layouts
 
 English (US QWERTY) · Thai (Kedmanee) · German (QWERTZ) · Russian (ЙЦУКЕН) · Ukrainian (ЙЦУКЕН) · French (AZERTY) · Spanish (QWERTY ES) · Hebrew
 
-### Using it
+#### Using it
 
 1. Paste the garbled text into box **A**.
 2. Set **Typed as** and **Should have been** to the two layouts involved. Each picker previews the layout's home-row keys (a s d f g on that layout).
 3. The fix types itself out as you go, and the key map below lights up the keys your text used. Click **Auto-detect direction** if you're not sure which way round the layouts go.
 4. Click **Copy**.
 
-### Adding a layout
-
-Every layout in `layouts.js` is two 47-character arrays — `unshifted` and `shifted` — lined up against the shared `SLOTS` physical-key order. Drop a new entry into the `LAYOUTS` object with your layout's characters in the same 47 positions and it shows up in both pickers and on the key map automatically. [STANDARDS.md](STANDARDS.md#layout-data) lists what a new layout ships with (tests, script detection, docs).
-
-## Romaji → Kana
+### Romaji → Kana
 
 Type Japanese the way you would on any English keyboard; get proper kana back.
 
@@ -69,7 +73,7 @@ Handles the standard Hepburn conventions: doubled consonants → small tsu, ん 
 
 **Why no Mandarin pinyin?** Kana conversion works because romaji → kana is a direct, one-to-one mapping. Pinyin isn't: a single syllable maps to several unrelated Chinese characters (`ma` → 妈 / 麻 / 马 / 骂, depending on tone and meaning), so a real converter needs a dictionary and a candidate picker — a genuinely different kind of tool, not an extension of this one.
 
-## Known limitations
+### Known limitations
 
 - **Rare shifted symbols** (Thai tone-mark positions, German/French AltGr characters, Spanish accent/dead-keys) were built from reference material rather than verified on physical hardware and may be slightly off. A few obscure Thai shift-row slots use placeholder Thai punctuation (๛ ๏ ๚ ๎) where the true value wasn't reliably known — this keeps every key round-trip-safe instead of risking silent data loss on a guess.
 - **Hebrew has no letter case.** Converting mixed-case Latin text through Hebrew and back loses capitalization (`Hello` and `hello` land on the same key) — this matches a real Hebrew keyboard, not a bug. The same applies to a few US shift-symbols (`:` `"` `<` `>`) whose physical keys are reassigned to Hebrew letters.
@@ -77,6 +81,16 @@ Handles the standard Hepburn conventions: doubled consonants → small tsu, ん 
 - **The key map shows unshifted legends.** A shifted character (a capital letter, a Thai shift-row mark) lights the correct key, but the key shows its unshifted characters.
 
 Spot something off? Open an issue or PR.
+
+## Privacy
+
+Nothing you type is stored or sent anywhere: both conversions run in your browser. Your Mode and Paper choices are kept in the browser's local storage. The pages load their fonts from Google Fonts.
+
+## Development
+
+### Adding a layout
+
+Every layout in `layouts.js` is two 47-character arrays — `unshifted` and `shifted` — lined up against the shared `SLOTS` physical-key order. Drop a new entry into the `LAYOUTS` object with your layout's characters in the same 47 positions and it shows up in both pickers and on the key map automatically. [STANDARDS.md](STANDARDS.md#layout-data) lists what a new layout ships with (tests, script detection, docs).
 
 ## Tests
 
